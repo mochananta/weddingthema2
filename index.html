@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Wedding Invitation</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marcellus&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    img,
+    video {
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .font-title {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loader-ring {
+      width: 60px;
+      height: 60px;
+      border: 4px solid #c08a5b;
+      border-top: 4px solid #1c1f26;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .fade-item {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s forwards;
+    }
+
+    .fade-item:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+
+    .fade-item:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    .fade-item:nth-child(3) {
+      animation-delay: 0.9s;
+    }
+
+    .fade-item:nth-child(4) {
+      animation-delay: 1.2s;
+    }
+
+    .fade-item:nth-child(5) {
+      animation-delay: 1.5s;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="flex justify-center bg-[#1c1f26] text-[#f3e4d6]">
+
+  <div class="w-full max-w-[430px] bg-gradient-to-b from-[#1c1f26] via-[#2a1f1a] to-[#3b2318] relative shadow-2xl">
+
+    <!-- LOADING SCREEN -->
+    <div id="loader" class="fixed inset-0 z-[999] flex items-center justify-center bg-white">
+      <div class="loader-ring"></div>
+    </div>
+
+    <audio id="bgMusic" loop>
+      <source src="Beautiful in White x Canon in D (Piano Cover by Riyandi Kusuma).mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="musicBtn"
+      class="fixed bottom-6 right-6 z-[999] w-12 h-12 rounded-full bg-[#c08a5b] text-white flex items-center justify-center shadow-lg hidden">
+
+      <svg id="iconPlay" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24"
+        fill="currentColor">
+        <path d="M8 5v14l11-7z" />
+      </svg>
+
+      <svg id="iconPause" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden" viewBox="0 0 24 24"
+        fill="currentColor">
+        <path d="M6 5h4v14H6zm8 0h4v14h-4z" />
+      </svg>
+
+    </button>
+
+    <section id="cover" class="absolute inset-0 z-50">
+
+      <div class="relative w-full min-h-[100svh] overflow-hidden">
+
+        <video autoplay muted loop playsinline preload="metadata" class="absolute inset-0 w-full h-full object-cover">
+          <source src="cover.mp4" type="video/mp4">
+        </video>
+
+        <div class="absolute inset-0"></div>
+
+        <div class="relative z-10 flex flex-col items-center justify-center text-center px-6 min-h-[100svh]">
+
+          <p class="text-[#cbb79c] text-sm mb-3 tracking-[4px]"
+            style="font-family: 'Marcellus', serif; letter-spacing:3px;">
+            The Wedding Of
+          </p>
+
+          <h1 class="text-5xl md:text-6xl text-[#f3e4d6] mb-10 leading-tight"
+            style="font-family: 'Great Vibes', cursive;">
+            Rizki <span class="text-[#c08a5b]">&</span> Aisyah
+          </h1>
+
+          <div class="bg-[#2a1f1a]/70 backdrop-blur-md 
+              border border-[#c08a5b]/40 
+              rounded-3xl px-10 py-10 
+              text-center shadow-2xl">
+
+            <p class="text-[#d6bfa7] text-sm mb-2 tracking-wide font-light">
+              Kepada Yth.
+            </p>
+
+            <p class="text-[#f3e4d6] text-lg mb-8 guest-name"
+              style="font-family: 'Cormorant Garamond', serif; letter-spacing:0.5px;">
+              Tamu Undangan
+            </p>
+
+            <button id="openBtn" class="flex items-center gap-3 px-8 py-3 rounded-full 
+             bg-[#c49a6c] text-[#1c1f26] 
+             font-semibold tracking-wide 
+             shadow-lg hover:scale-105 
+             transition duration-300 mx-auto">
+
+              <img src="https://cdn-icons-png.flaticon.com/128/1250/1250973.png" alt="icon surat" class="w-5 h-5">
+
+              Buka Undangan
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="content" class="hidden">
+
+      <div class="w-full snap-start relative reveal">
+        <video autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover block">
+          <source src="section 2.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="w-full snap-start relative reveal">
+
+        <img src="section 3.png" alt="Section 3" class="w-full h-auto block">
+
+        <a href="https://instagram.com/rizki" target="_blank" class="absolute top-[35%] right-[22%]
+        transition duration-300 hover:scale-110 hover:-translate-y-1">
+
+          <img src="instagram.png" class="w-7 h-7">
+        </a>
+
+        <a href="https://instagram.com/aisyah" target="_blank" class="absolute top-[83%] right-[78%]
+        transition duration-300 hover:scale-110 hover:-translate-y-1">
+
+          <img src="instagram.png" class="w-7 h-7">
+        </a>
+
+      </div>
+
+      <!-- <div class="w-full snap-start relative reveal">
+
+        <img src="section 4.png" alt="Section 4" class="w-full h-auto block">
+
+        <a href="https://instagram.com/username" target="_blank" class="absolute bottom-20 left-1/2 -translate-x-1/2
+            transition duration-300 ease-out
+            hover:scale-110 hover:-translate-y-1 hover:opacity-80">
+
+          <img src="instagram.png" alt="Instagram" class="w-7 h-7">
+        </a>
+
+      </div> -->
+
+      <div class="w-full min-h-[100svh] relative reveal overflow-hidden">
+
+        <img src="section 4.png" alt="Section 4" class="absolute inset-0 w-full h-full object-cover">
+
+        <div
+          class="relative z-10 flex flex-col items-center text-center min-h-[100svh] px-6 pt-[20vh] pb-16 font-['Montserrat']">
+
+          <!-- Countdown -->
+          <div id="countdown" class="grid grid-cols-4 gap-3 mb-10 fade-item text-[#5c3a2e] w-full max-w-xs">
+
+            <div class="bg-[#f5ede3]/80 backdrop-blur-md rounded-2xl py-3 shadow-md">
+              <p id="days" class="text-xl font-semibold">00</p>
+              <span class="text-[10px] tracking-wide">Days</span>
+            </div>
+
+            <div class="bg-[#f5ede3]/80 backdrop-blur-md rounded-2xl py-3 shadow-md">
+              <p id="hours" class="text-xl font-semibold">00</p>
+              <span class="text-[10px] tracking-wide">Hours</span>
+            </div>
+
+            <div class="bg-[#f5ede3]/80 backdrop-blur-md rounded-2xl py-3 shadow-md">
+              <p id="minutes" class="text-xl font-semibold">00</p>
+              <span class="text-[10px] tracking-wide">Minutes</span>
+            </div>
+
+            <div class="bg-[#f5ede3]/80 backdrop-blur-md rounded-2xl py-3 shadow-md">
+              <p id="seconds" class="text-xl font-semibold">00</p>
+              <span class="text-[10px] tracking-wide">Seconds</span>
+            </div>
+
+          </div>
+
+
+          <!-- Card Acara -->
+          <div class="bg-[#f5ede3]/90 backdrop-blur-md
+  rounded-3xl p-7 shadow-xl space-y-6 
+  w-full max-w-xs fade-item text-[#5c3a2e]">
+
+            <div>
+              <h4 class="text-lg font-semibold font-['Playfair_Display'] text-[#c08a5b]">
+                Akad Nikah
+              </h4>
+              <p class="text-sm mt-1">08.00 WIB</p>
+            </div>
+
+            <div>
+              <h4 class="text-lg font-semibold font-['Playfair_Display'] text-[#c08a5b]">
+                Resepsi
+              </h4>
+              <p class="text-sm mt-1">11.00 WIB - Selesai</p>
+            </div>
+
+            <div>
+              <h4 class="text-lg font-semibold font-['Playfair_Display'] text-[#c08a5b]">
+                Lokasi
+              </h4>
+
+              <p class="text-sm mt-1 mb-4">
+                Gedung Serbaguna Bahagia
+              </p>
+
+              <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-2 px-5 py-2 rounded-full
+      bg-[#c49a6c] text-white text-sm
+      shadow-md hover:scale-105 transition duration-300">
+
+                <img src="https://cdn-icons-png.flaticon.com/128/2776/2776063.png" class="w-4 h-4">
+
+                Lihat Lokasi
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="w-full min-h-[100svh] relative reveal overflow-hidden">
+
+        <!-- Background -->
+        <img src="section 5.png" alt="Gallery Background" class="absolute inset-0 w-full h-full object-cover">
+
+        <!-- Content -->
+        <div class="relative z-10 px-6 py-20 flex flex-col items-center">
+
+          <!-- Title -->
+          <h2 class="text-3xl font-['Playfair_Display'] text-[#c08a5b] mb-10 fade-item">
+            Our Gallery
+          </h2>
+
+          <!-- Grid Gallery -->
+          <div class="grid grid-cols-2 gap-4 max-w-sm fade-item">
+
+            <div class="overflow-hidden rounded-2xl shadow-lg">
+              <img src="wedding.jpg" class="w-full h-full object-cover transition duration-500 hover:scale-110">
+            </div>
+
+            <div class="overflow-hidden rounded-2xl shadow-lg">
+              <img
+                src="https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHdlZGRpbmd8ZW58MHx8MHx8fDA%3D"
+                class="w-full h-full object-cover transition duration-500 hover:scale-110">
+            </div>
+
+            <div class="overflow-hidden rounded-2xl shadow-lg">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1675719847698-6c8a924b2a7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHdlZGRpbmd8ZW58MHx8MHx8fDA%3D"
+                class="w-full h-full object-cover transition duration-500 hover:scale-110">
+            </div>
+
+            <div class="overflow-hidden rounded-2xl shadow-lg">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1675851210020-045950ac0215?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fHdlZGRpbmd8ZW58MHx8MHx8fDA%3D"
+                class="w-full h-full object-cover transition duration-500 hover:scale-110">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="w-full min-h-[100svh] relative reveal overflow-hidden">
+
+        <img src="section 6.png" alt="Section 7" class="absolute inset-0 w-full h-full object-cover">
+
+        <div class="relative z-10 flex flex-col items-center justify-center
+        text-center min-h-[100svh] px-6 py-20">
+
+          <h3 class="font-title text-3xl text-[#c08a5b] mb-4 fade-item">
+            Wedding Gift
+          </h3>
+
+          <p class="text-sm text-white mb-12 max-w-xs leading-relaxed fade-item">
+            Doa restu Anda merupakan karunia yang sangat berarti bagi kami.
+            Namun jika memberi adalah ungkapan tanda kasih,
+            Anda dapat memberi kado secara cashless.
+          </p>
+
+
+          <div class="bg-white/85 backdrop-blur-md border border-gray-200
+          rounded-2xl p-7 shadow-lg w-full max-w-sm mb-6 fade-item
+          transition hover:shadow-xl">
+
+            <div class="flex justify-center mb-5">
+              <img src="https://png.pngtree.com/png-vector/20221121/ourmid/pngtree-bca-bank-logo-png-image_6472275.png"
+                class="h-10 object-contain">
+            </div>
+
+            <p class="text-lg font-semibold tracking-widest text-gray-800">
+              1234567890
+            </p>
+
+            <p class="text-sm text-gray-600 mt-1 mb-5">
+              a.n Ardi Pratama
+            </p>
+
+            <button onclick="copyRek('1234567890')" class="px-6 py-2.5 rounded-full text-white text-sm
+        shadow-md transition duration-300
+        hover:scale-105 hover:shadow-lg" style="background:#c49a6c;">
+
+              Salin Rekening
+            </button>
+
+          </div>
+
+
+          <div class="bg-white/85 backdrop-blur-md border border-gray-200
+          rounded-2xl p-6 shadow-lg w-full max-w-sm fade-item
+          transition hover:shadow-xl">
+
+            <img
+              src="data:image/png;base64,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"
+              class="w-40 mx-auto mb-4">
+
+            <p class="text-sm text-gray-600">
+              Scan QR untuk kirim hadiah
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="w-full min-h-[100svh] relative reveal overflow-hidden">
+
+        <img src="section 7.png" alt="Section 8" class="absolute inset-0 w-full h-full object-cover">
+
+        <div class="relative z-10 flex flex-col items-center justify-center
+        text-center min-h-[100svh] px-6 py-20">
+
+          <h3 class="font-title text-3xl text-[#c08a5b] mb-3 fade-item">
+            RSVP
+          </h3>
+
+          <p class="text-sm text-white mb-10 max-w-xs fade-item">
+            Mohon konfirmasi kehadiran serta doa terbaik Anda
+            untuk hari bahagia kami.
+          </p>
+
+          <div class="bg-white/85 backdrop-blur-md border border-[#e6d3b3]
+          rounded-3xl p-7 shadow-xl w-full max-w-sm space-y-5 fade-item
+          transition hover:shadow-2xl">
+
+            <input type="text" placeholder="Nama Anda" class="w-full px-4 py-3 rounded-xl border border-[#e6d3b3]
+        focus:outline-none focus:ring-2 focus:ring-[#c08a5b]
+        text-sm">
+
+            <div class="flex flex-col items-start gap-3 text-sm text-gray-700">
+
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="attendance" value="Hadir" class="accent-[#c08a5b]">
+                <span>Hadir</span>
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" name="attendance" value="Tidak Hadir" class="accent-[#c08a5b]">
+                <span>Tidak Hadir</span>
+              </label>
+
+            </div>
+
+            <textarea rows="3" placeholder="Tulis ucapan & doa..." class="w-full px-4 py-3 rounded-xl border border-[#e6d3b3]
+        focus:outline-none focus:ring-2 focus:ring-[#c08a5b]
+        text-sm resize-none"></textarea>
+
+            <button class="w-full py-3 rounded-full text-white text-sm
+        shadow-md transition duration-300
+        hover:scale-105 hover:shadow-lg" style="background:#c49a6c;">
+
+              Kirim RSVP
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="w-full flex justify-center reveal">
+
+        <div class="relative w-full max-w-[430px] aspect-[9/16] overflow-hidden">
+
+          <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="section 8.mp4" type="video/mp4">
+          </video>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  <script>
+    const openBtn = document.getElementById("openBtn");
+    const cover = document.getElementById("cover");
+    const content = document.getElementById("content");
+    const loader = document.getElementById("loader");
+    const coverVideo = document.querySelector("#cover video");
+
+    coverVideo.addEventListener("loadeddata", function () {
+      loader.style.opacity = "0";
+      loader.style.transition = "opacity 0.10s ease";
+
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 1000);
+    });
+
+    openBtn.addEventListener("click", function () {
+      cover.remove();
+      content.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
+
+    const reveals = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    reveals.forEach(reveal => {
+      observer.observe(reveal);
+    });
+  </script>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const iconPlay = document.getElementById("iconPlay");
+    const iconPause = document.getElementById("iconPause");
+
+    openBtn.addEventListener("click", function () {
+      music.play().catch(() => { });
+      musicBtn.classList.remove("hidden");
+      iconPlay.classList.add("hidden");
+      iconPause.classList.remove("hidden");
+    });
+
+    musicBtn.addEventListener("click", function () {
+      if (music.paused) {
+        music.play();
+        iconPlay.classList.add("hidden");
+        iconPause.classList.remove("hidden");
+      } else {
+        music.pause();
+        iconPlay.classList.remove("hidden");
+        iconPause.classList.add("hidden");
+      }
+    });
+  </script>
+
+  <script>
+    const targetDate = new Date("October 20, 2026 08:00:00").getTime();
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / 1000 / 60) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById("days").innerHTML = days;
+      document.getElementById("hours").innerHTML = hours;
+      document.getElementById("minutes").innerHTML = minutes;
+      document.getElementById("seconds").innerHTML = seconds;
+
+    }, 1000);
+  </script>
+
+  <script>
+    function copyRek(nomor) {
+      navigator.clipboard.writeText(nomor);
+      alert("Nomor rekening berhasil disalin");
+    }
+  </script>
+
+  <script>
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    document.addEventListener("dragstart", e => e.preventDefault());
+
+    document.addEventListener("keydown", function (e) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && e.key === "I") ||
+        (e.ctrlKey && e.shiftKey && e.key === "J") ||
+        (e.ctrlKey && e.key === "U")
+      ) {
+        e.preventDefault();
+      }
+    });
+  </script>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get("to");
+
+    if (guestName) {
+      document.querySelectorAll(".guest-name").forEach(el => {
+        el.textContent = decodeURIComponent(guestName);
+      });
+    }
+  </script>
+
+</body>
+
+</html>
